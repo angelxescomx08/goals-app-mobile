@@ -1,5 +1,6 @@
 import { Navigate, Outlet } from "react-router";
 import { authClient } from "@/lib/auth";
+import { MainHeader } from "@/components/MainHeader";
 
 export function PrivateRoute() {
   const { data: session, isPending } = authClient.useSession();
@@ -10,5 +11,10 @@ export function PrivateRoute() {
     return <Navigate to="/auth/login" replace />;
   }
 
-  return <Outlet />;
+  return (
+    <>
+      <MainHeader />
+      <Outlet />
+    </>
+  );
 }

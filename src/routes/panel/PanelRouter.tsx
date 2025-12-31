@@ -1,5 +1,6 @@
 import { RouteObject } from "react-router";
 import { PrivateRoute } from "../PrivateRoute";
+import { GoalsPage } from "@/modules/goals/pages/GoalsPage";
 
 export const PanelRouter: RouteObject = {
   path: "/panel",
@@ -7,7 +8,7 @@ export const PanelRouter: RouteObject = {
   children: [
     {
       path: "/panel",
-      element: <div>Panel</div>,
+      element: <GoalsPage />,
     },
   ],
 };
