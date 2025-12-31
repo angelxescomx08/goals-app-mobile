@@ -6,3 +6,9 @@ export const loginSchema = z.object({
 })
 
 export type LoginSchema = z.infer<typeof loginSchema>
+
+export const registerSchema = loginSchema.extend({
+  name: z.string().min(1, "Nombre requerido"),
+})
+
+export type RegisterSchema = z.infer<typeof registerSchema>
