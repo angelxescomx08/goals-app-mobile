@@ -5,9 +5,9 @@ export const GoalsPage = () => {
   const { goals } = useGoalsByUser()
 
   return (
-    <main className="container">
-      {goals.data?.data.length === 0 &&
-      <Alert>
+    <main className="container p-2">
+      {goals.data?.data.goals.length === 0 &&
+      <Alert variant="destructive">
         <AlertTitle>No hay metas</AlertTitle>
         <AlertDescription>No hay metas creadas todavía.</AlertDescription>
       </Alert>
