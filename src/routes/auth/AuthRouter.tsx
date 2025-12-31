@@ -1,6 +1,7 @@
 import { Outlet } from "react-router";
-import { LoginPage } from "@/modules/auth/pages/Login";
+import { LoginPage } from "@/modules/auth/pages/LoginPage";
 import { RouteObject } from "react-router";
+import { RegisterPage } from "@/modules/auth/pages/RegisterPage";
 
 export const AuthRouter: RouteObject = {
   path: "/auth",
@@ -10,5 +11,9 @@ export const AuthRouter: RouteObject = {
       path: "login",
       element: <LoginPage />,
     },
+    {
+      path: "register",
+      element: <RegisterPage />,
+    }
   ],
 };
