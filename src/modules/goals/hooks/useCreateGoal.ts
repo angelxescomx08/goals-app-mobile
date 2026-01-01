@@ -1,6 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { createGoalSchema, CreateGoalSchema } from "../schemas/goalSchema"
+import { createGoal } from "../actions/goalsActions"
 
 export const useCreateGoal = () => {
 
@@ -16,7 +17,12 @@ export const useCreateGoal = () => {
     },
   })
 
+  const handleSubmit = async (data: CreateGoalSchema) => {
+    return await createGoal(data)
+  }
+
   return {
     form,
+    handleSubmit,
   }
 }

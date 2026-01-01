@@ -4,15 +4,17 @@ import { Controller } from "react-hook-form"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
+import { Button } from "@/components/ui/button"
+import { PlusIcon } from "lucide-react"
 
 export const CreateGoalPage = () => {
 
-  const { form } = useCreateGoal()
+  const { form, handleSubmit } = useCreateGoal()
 
   return (
     <main className="container p-2">
       <h1 className="text-2xl font-bold">Crear meta</h1>
-      <form>
+      <form onSubmit={form.handleSubmit(handleSubmit)}>
         <FieldGroup>
           <Controller
             name="title"
@@ -127,6 +129,10 @@ export const CreateGoalPage = () => {
               </Field>
             )}
           />
+          <Button type="submit">
+            Crear meta
+            <PlusIcon className="w-4 h-4" />
+          </Button>
         </FieldGroup>
       </form>
     </main>
