@@ -2,8 +2,11 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { createGoalSchema, CreateGoalSchema } from "../schemas/goalSchema"
 import { createGoal } from "../actions/goalsActions"
+import { useEffect, useState } from "react"
 
 export const useCreateGoal = () => {
+
+  const [showTargetAndUnit, setShowTargetAndUnit] = useState(false)
 
   const form = useForm<CreateGoalSchema>({
     resolver: zodResolver(createGoalSchema),
@@ -21,8 +24,19 @@ export const useCreateGoal = () => {
     return await createGoal(data)
   }
 
+  useEffect(() => {
+    if (form.getValues("goal_type") === "target") {
+      form.setValue("unit_id", null)
+      form.setValue("target", null)
+      setShowTargetAndUnit(true)
+    } else {
+      setShowTargetAndUnit(false)
+    }
+  }, [form.watch("goal_type")])
+
   return {
     form,
     handleSubmit,
+    showTargetAndUnit,
   }
 }

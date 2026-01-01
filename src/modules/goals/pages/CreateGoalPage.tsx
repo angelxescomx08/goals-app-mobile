@@ -9,7 +9,7 @@ import { PlusIcon } from "lucide-react"
 
 export const CreateGoalPage = () => {
 
-  const { form, handleSubmit } = useCreateGoal()
+  const { form, handleSubmit, showTargetAndUnit } = useCreateGoal()
 
   return (
     <main className="container p-2">
@@ -45,7 +45,7 @@ export const CreateGoalPage = () => {
                 <FieldLabel htmlFor="goal_type">
                   Tipo de meta
                 </FieldLabel>
-                <Select {...field}>
+                <Select onValueChange={field.onChange} value={field.value ?? "target"}>
                   <SelectTrigger>
                     <SelectValue placeholder="Selecciona un tipo de meta" />
                   </SelectTrigger>
@@ -61,7 +61,7 @@ export const CreateGoalPage = () => {
               </Field>
             )}
           />
-          <Controller
+          {showTargetAndUnit && <Controller
             name="unit_id"
             control={form.control}
             render={({ field, fieldState }) => (
@@ -83,8 +83,8 @@ export const CreateGoalPage = () => {
                 )}
               </Field>
             )}
-          />
-          <Controller
+          />}
+          {showTargetAndUnit && <Controller
             name="target"
             control={form.control}
             render={({ field, fieldState }) => (
@@ -106,7 +106,7 @@ export const CreateGoalPage = () => {
                 )}
               </Field>
             )}
-          />
+          />}
           <Controller
             name="description"
             control={form.control}
