@@ -3,10 +3,12 @@ import { useForm } from "react-hook-form"
 import { createGoalSchema, CreateGoalSchema } from "../schemas/goalSchema"
 import { createGoal } from "../actions/goalsActions"
 import { useEffect, useState } from "react"
+import { useUnitsByUser } from "@/modules/units/hooks/useUnitsByUser"
 
 export const useCreateGoal = () => {
 
   const [showTargetAndUnit, setShowTargetAndUnit] = useState(false)
+  const { units } = useUnitsByUser()
 
   const form = useForm<CreateGoalSchema>({
     resolver: zodResolver(createGoalSchema),
@@ -38,5 +40,6 @@ export const useCreateGoal = () => {
     form,
     handleSubmit,
     showTargetAndUnit,
+    units,
   }
 }

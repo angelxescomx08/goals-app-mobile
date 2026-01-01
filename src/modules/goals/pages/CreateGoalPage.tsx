@@ -9,7 +9,7 @@ import { PlusIcon } from "lucide-react"
 
 export const CreateGoalPage = () => {
 
-  const { form, handleSubmit, showTargetAndUnit } = useCreateGoal()
+  const { form, handleSubmit, showTargetAndUnit, units } = useCreateGoal()
 
   return (
     <main className="container p-2">
@@ -61,29 +61,37 @@ export const CreateGoalPage = () => {
               </Field>
             )}
           />
-          {showTargetAndUnit && <Controller
-            name="unit_id"
-            control={form.control}
-            render={({ field, fieldState }) => (
-              <Field data-invalid={fieldState.invalid}>
-                <FieldLabel htmlFor="unit_id">
-                  Unidad de medida
-                </FieldLabel>
-                <Select {...field} value={field.value ?? "null"}>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Selecciona un tipo de meta" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="null">Ninguna</SelectItem>
-                    
-                  </SelectContent>
-                </Select>
-                {fieldState.invalid && (
-                  <FieldError errors={[fieldState.error]} />
-                )}
-              </Field>
-            )}
-          />}
+          {showTargetAndUnit && <div className="flex gap-2 items-end">
+            <Controller
+              name="unit_id"
+              control={form.control}
+              render={({ field, fieldState }) => (
+                <Field data-invalid={fieldState.invalid}>
+                  <FieldLabel htmlFor="unit_id">
+                    Unidad de medida
+                  </FieldLabel>
+                  <Select {...field} value={field.value ?? "null"}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Selecciona un tipo de meta" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="null">Ninguna</SelectItem>
+                      {units.data?.data.units.map((unit) => (
+                        <SelectItem key={unit.id} value={unit.id}>{unit.name}</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  {fieldState.invalid && (
+                    <FieldError errors={[fieldState.error]} />
+                  )}
+                </Field>
+              )}
+            />
+            <Button type="button">
+              <PlusIcon className="w-4 h-4" />
+            </Button>
+          </div>}
+
           {showTargetAndUnit && <Controller
             name="target"
             control={form.control}
