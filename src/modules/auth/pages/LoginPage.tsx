@@ -7,10 +7,11 @@ import { Link } from "react-router"
 
 export const LoginPage = () => {
 
-  const { form } = useLogin()
+  const { form, handleSubmit, signInWithGoogle } = useLogin()
+
   return (
     <main className="container p-4">
-      <form>
+      <form onSubmit={form.handleSubmit(handleSubmit)}>
         <FieldGroup>
           <Controller
             name="email"
@@ -56,6 +57,9 @@ export const LoginPage = () => {
             )}
           />
           <Button type="submit" className="w-full">Iniciar sesión</Button>
+          <Button type="button" onClick={signInWithGoogle}>
+            Iniciar sesión con Google <img className="w-5 h-5" src="/google.webp" alt="Google" />
+          </Button>
           <Link to="/auth/register">¿No tienes una cuenta? Regístrate</Link>
         </FieldGroup>
       </form>
