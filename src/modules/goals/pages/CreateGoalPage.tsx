@@ -6,6 +6,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
 import { PlusIcon } from "lucide-react"
+import { CreateUnitDrawer } from "@/modules/units/components/CreateUnitDrawer"
 
 export const CreateGoalPage = () => {
 
@@ -87,9 +88,7 @@ export const CreateGoalPage = () => {
                 </Field>
               )}
             />
-            <Button type="button">
-              <PlusIcon className="w-4 h-4" />
-            </Button>
+            <CreateUnitDrawer />
           </div>}
 
           {showTargetAndUnit && <Controller
