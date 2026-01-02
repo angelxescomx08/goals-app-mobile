@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "tauri": "tauri"
+    "tauri": "tauri",
+    "init": "bunx tauri android init",
+    "apk": "bun tauri android build --apk true --aab true"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
