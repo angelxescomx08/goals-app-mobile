@@ -88,7 +88,7 @@ export const CreateGoalPage = () => {
                 </Field>
               )}
             />
-            <CreateUnitDrawer />
+            <CreateUnitDrawer  />
           </div>}
 
           {showTargetAndUnit && <Controller

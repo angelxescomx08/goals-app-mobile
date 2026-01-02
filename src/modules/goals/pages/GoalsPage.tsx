@@ -1,10 +1,12 @@
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { useGoalsByUser } from "../hooks/useGoalsByUser"
+import { useInfiniteGoalsByUser } from "../hooks/useInfiniteGoalsByUser"
 import { Link } from "react-router"
 import { Plus } from "lucide-react"
+import { InfiniteList } from "@/components/InfiniteList"
+import { GoalCard } from "../components/GoalCard"
 
 export const GoalsPage = () => {
-  const { goals } = useGoalsByUser()
+  const { goals } = useInfiniteGoalsByUser()
 
   return (
     <main className="container p-2">
@@ -12,11 +14,22 @@ export const GoalsPage = () => {
         <Plus className="size-6" />
         <span className="text-sm font-medium">Crear meta</span>
       </Link>
-      {goals.data?.data.goals.length === 0 &&
-        <Alert variant="destructive">
-          <AlertTitle>No hay metas</AlertTitle>
-          <AlertDescription>No hay metas creadas todavía.</AlertDescription>
-        </Alert>
+      {
+
+        <InfiniteList
+          isLoading={goals.isFetching}
+          alertNoItems={
+            <Alert variant="destructive">
+              <AlertTitle>No hay metas</AlertTitle>
+              <AlertDescription>No hay metas creadas todavía.</AlertDescription>
+            </Alert>
+          }
+          items={goals.data?.pages.flatMap(page => page.data.data) ?? []}
+          renderItem={goal => <GoalCard key={goal.id} goal={goal} />}
+          skeleton={<div className="animate-pulse">
+            <div className="h-20 w-full bg-muted rounded-md" />
+          </div>}
+        />
       }
     </main>
   )
